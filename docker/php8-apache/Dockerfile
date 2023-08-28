@@ -33,8 +33,8 @@ RUN apt-get update && apt-get install -y iputils-ping && apt-get install -y teln
 
 RUN apt-get install -y libzip-dev zip && docker-php-ext-install zip
 
-RUN apt-get update && apt-get install curl # && curl -sL https://deb.nodesource.com/setup_14.x | bash
-#RUN apt-get install nodejs
+RUN apt-get update && apt-get install curl  && curl -sL https://deb.nodesource.com/setup_14.x | bash
+RUN apt-get install npm -y
 #RUN npm install --global yarn
 
 RUN apt-get install -y libjpeg-dev libpng-dev libfreetype6-dev libwebp-dev
@@ -45,6 +45,9 @@ RUN apt-get update && apt-get install -y \
     imagemagick libmagickwand-dev --no-install-recommends \
     && pecl install imagick \
     && docker-php-ext-enable imagick
+
+RUN apt-get -y install libnss3-dev libgdk-pixbuf2.0-dev libgtk-3-dev libxss-dev
+RUN apt-get -y install libasound2
 
 RUN sed -i 's/memory_limit\s*=.*/memory_limit=1024M/g' "$PHP_INI_DIR/php.ini-development"
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
