@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Services\Config;
+namespace App\Services\GitLab\Config;
 
 interface ConfigInterface
 {
     public function getBaseUrl(): string;
     public function getToken(): string;
+    public function getCurrentProjectId(): string;
 }
