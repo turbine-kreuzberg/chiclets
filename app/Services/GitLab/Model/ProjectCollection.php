@@ -72,8 +72,8 @@ class ProjectCollection implements ArrayAccess, Countable
                 'id' => $project->getId(),
                 'name' => $project->getName(),
                 'webUrl' => $project->getWebUrl(),
-                'createdAt' => $project->getCreatedAt(),
-                'updatedAt' => $project->getUpdatedAt(),
+                'avatarUrl' => $project->getAvatarUrl(),
+                'defaultBranch' => $project->getDefaultBranch(),
             ];
         }
         return $list;
