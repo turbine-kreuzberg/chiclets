@@ -51,4 +51,31 @@ class ProjectCollection implements ArrayAccess, Countable
     {
         return count($this->collection);
     }
+
+    /**
+     * @return Pipeline[]
+     */
+    public function toArray(): array
+    {
+        $list = [];
+        foreach ($this->collection as $project) {
+            $list[] = clone $project;
+        }
+        return $list;
+    }
+
+    public function serialize(): array
+    {
+        $list = [];
+        foreach ($this->collection as $project) {
+            $list[] = [
+                'id' => $project->getId(),
+                'name' => $project->getName(),
+                'webUrl' => $project->getWebUrl(),
+                'createdAt' => $project->getCreatedAt(),
+                'updatedAt' => $project->getUpdatedAt(),
+            ];
+        }
+        return $list;
+    }
 }

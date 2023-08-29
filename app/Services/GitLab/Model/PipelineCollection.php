@@ -51,4 +51,34 @@ class PipelineCollection implements ArrayAccess, Countable
     {
         return count($this->collection);
     }
+
+    /**
+     * @return Pipeline[]
+     */
+    public function toArray(): array
+    {
+        $list = [];
+        foreach ($this->collection as $pipeline) {
+            $list[] = clone $pipeline;
+        }
+        return $list;
+    }
+
+    public function serialize(): array
+    {
+        $list = [];
+        foreach ($this->collection as $pipeline) {
+            $list[] = [
+                'id' => $pipeline->getId(),
+                'projectId' => $pipeline->getProjectId(),
+                'status' => $pipeline->getStatus(),
+                'ref' => $pipeline->getRef(),
+                'name' => $pipeline->getName(),
+                'webUrl' => $pipeline->getWebUrl(),
+                'createdAt' => $pipeline->getCreatedAt(),
+                'updatedAt' => $pipeline->getUpdatedAt(),
+            ];
+        }
+        return $list;
+    }
 }
