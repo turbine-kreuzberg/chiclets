@@ -24,28 +24,14 @@ class GitLabService implements GitlabServiceInterface
         $url = sprintf(self::GET_PIPELINES_URL_PATTERN, $this->config->getCurrentProjectId());
         $response = json_decode($this->getConnection()->get($url)->getBody(), true, 512, JSON_THROW_ON_ERROR);
 
-        $pipelineCollection = new PipelineCollection();
-        foreach ($response as $pipeline) {
-            $pipelineObj = new Pipeline($pipeline);
-
-            $pipelineCollection[] = $pipelineObj;
-        }
-
-        return $pipelineCollection;
+        return new PipelineCollection($response);
     }
 
     public function getProjects(): ProjectCollection
     {
         $response = json_decode($this->getConnection()->get(self::GET_PROJECTS_URL)->getBody(), true, 512, JSON_THROW_ON_ERROR);
 
-        $projectCollection = new ProjectCollection();
-        foreach ($response as $project) {
-            $projectObj = new Project($project);
-
-            $projectCollection[] = $projectObj;
-        }
-
-        return $projectCollection;
+        return new ProjectCollection($response);
     }
 
     private function getConnection(): Client {
