@@ -3,31 +3,35 @@
 namespace App\Livewire;
 
 use App\Models\Config;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 class Settings extends Component
 {
-    public string $gitlab_url = '';
+    public Config $config;
 
-    public string $gitlab_api_token = 'foo';
+    public array $configData;
 
-    public int $pipeline_display_number = 5;
-
-    public function save()
+    public function mount(): void
     {
-        Config::firstOr(function (){
-            return Config::create();
-        })->update($this->only([
-            'gitlab_url',
-            'gitlab_api_token',
-            'pipeline_display_number',
-        ]));
+        $this->config = Config::first() ?: new Config([
+            'gitlab_url' => '',
+            'gitlab_api_token' => '',
+            'pipeline_display_number' => 5
+        ]);
+
+        $this->configData = $this->config->toArray();
     }
 
-
-    public function render()
+    public function render(): View
     {
         return view('livewire.settings');
+    }
+
+    public function save(): void
+    {
+        $this->config->fill($this->configData);
+        $this->config->save();
     }
 }
 

@@ -1,31 +1,26 @@
-<div>
-    <form class="w-full max-w-lg" wire:submit="save">
-        <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    GitLab URL
+<div class="settings">
+    <div class="box">
+        <h1 class="-mt-0.5em mb-0.5em text-center">Settings</h1>
+        <p class="mb-1em">This is your first setup. Please provide your credentials to gitlab.</p>
+        <hr />
+        <form wire:submit="save">
+            <div class="fields mb-2em">
+                <label class="field mb-1em">
+                    <span>Gitlab URLs</span>
+                    <input wire:model="configData.gitlab_url" class="border"/>
                 </label>
-                <input wire:model="gitlab_url"  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-first-name" type="text">
-            </div>
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    GitLab API Token
+                <label class="field mb-1em">
+                    <span>Access Token</span>
+                    <input wire:model="configData.gitlab_api_token" class="border"/>
                 </label>
-                <input wire:model="gitlab_api_token"  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-first-name" type="text">
-            </div>
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Number of pipelines being displayed
+                <label class="field mb-1em">
+                    <span>Max pipelines</span>
+                    <input wire:model="configData.pipeline_display_number" class="border"/>
                 </label>
-                <input wire:model="pipeline_display_number"  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-first-name" type="text">
             </div>
-        </div>
-        <div class="md:flex md:items-center">
-            <div class="md:w-3/3">
-                <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
-                    Save
-                </button>
+            <div class="buttons">
+                <button class="button w-full">Save</button>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>

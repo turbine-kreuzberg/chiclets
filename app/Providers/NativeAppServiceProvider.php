@@ -2,15 +2,14 @@
 
 namespace App\Providers;
 
-use App\Window\AuthenticationWindow;
-use Native\Laravel\Facades\MenuBar;
+use App\Window\SettingsWindow;
 use Native\Laravel\Contracts\ProvidesPhpIni;
 
 class NativeAppServiceProvider implements ProvidesPhpIni
 {
 
     public function __construct(
-        private readonly AuthenticationWindow $authenticationWindow
+        private readonly SettingsWindow $settingsWindow
     ) {
     }
 
@@ -20,10 +19,7 @@ class NativeAppServiceProvider implements ProvidesPhpIni
      */
     public function boot(): void
     {
-        $this->authenticationWindow->open();
-        MenuBar::create()
-            ->showDockIcon()
-            ->label('You are a pussy');
+        $this->settingsWindow->open();
     }
 
     /**
