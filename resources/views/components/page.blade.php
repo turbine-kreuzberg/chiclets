@@ -10,12 +10,16 @@
     <title>Chiclets</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @livewireStyles
 </head>
 <body>
 
 <div class="layout">
     {{ $slot }}
 </div>
+
+@livewireScripts
 
 </body>
 </html>
