@@ -2,34 +2,53 @@
 
 namespace App\Services\GitLab\Model;
 
-class ProjectCollection implements \ArrayAccess, \Countable
+use ArrayAccess;
+use Countable;
+use InvalidArgumentException;
+
+class ProjectCollection implements ArrayAccess, Countable
 {
+    /**
+     * @var Project[]
+     */
+    private array $collection;
+
+    public function __construct(array $data = [])
+    {
+        foreach ($data as $project) {
+            $this->collection[] = new Project($project);
+        }
+    }
 
     public function offsetExists(mixed $offset): bool
     {
-        // TODO: Implement offsetExists() method.
-        return false;
+        return isset($this->collection[$offset]);
     }
 
-    public function offsetGet(mixed $offset): mixed
+    public function offsetGet(mixed $offset): ?Project
     {
-        // TODO: Implement offsetGet() method.
-        return null;
+        return $this->collection[$offset] ?? null;
     }
 
+    /**
+     * @throws InvalidArgumentException if the $value argument is not an instance of Pipeline
+     */
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        // TODO: Implement offsetSet() method.
+        if (!($value instanceof Project)) {
+            throw new InvalidArgumentException("Invalid project instance");
+        }
+
+        $this->collection[$offset] = $value;
     }
 
     public function offsetUnset(mixed $offset): void
     {
-        // TODO: Implement offsetUnset() method.
+        unset($this->collection[$offset]);
     }
 
     public function count(): int
     {
-        // TODO: Implement count() method.
-        return 0;
+        return count($this->collection);
     }
 }
