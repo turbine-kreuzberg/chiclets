@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    --primary-color: dodgerblue;
+}
+
+body {
+}
+
+.layout {
+    min-height: 100%;
+}
+
+.container {
+    padding: 30px;
+}
+
+h1 {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.3em;
+    text-decoration: underline;
+}
+
+p {
+    color: #555;
+}
+
+hr {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    border-color: dodgerblue;
+}
+
+.block {
+    display: block;
+}
+
+.close:before {
+    content: 'X';
+    position: absolute;
+    top: 0;
+    right: 20px;
+    font-size: 1.7em;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 40em;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    box-shadow: 0 0 10px 10px #00000011;
+    color: dodgerblue;
+    border: 5px solid dodgerblue;
+}
+
+.box {
+    background: #fff;
+    padding: 2em;
+    box-shadow: 1px 1px 50px 1px #00000055;
+    border-top: 2px solid dodgerblue;
+}
+
+.field {
+    display: block;
+}
+
+.field span {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.field span:before {
+    content: '___ ';
+    font-size: 0.7em;
+    color: #999;
+}
+
+.field input {
+    display: block;
+    width: 100%;
+    padding: 1em;
+    border-bottom: 2px solid #ccc;
+}
+
+.field input:focus {
+    outline: none;
+    border-bottom-color: dodgerblue;
+    background: #f0f3ff;
+}
+
+.button {
+    padding: 0.5em 2em;
+    background: dodgerblue;
+    color: #fff;
+}

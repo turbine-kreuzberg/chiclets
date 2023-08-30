@@ -2,18 +2,24 @@
 
 namespace App\Providers;
 
-use Native\Laravel\Facades\Window;
+use App\Window\SettingsWindow;
 use Native\Laravel\Contracts\ProvidesPhpIni;
 
 class NativeAppServiceProvider implements ProvidesPhpIni
 {
+
+    public function __construct(
+        private readonly SettingsWindow $settingsWindow
+    ) {
+    }
+
     /**
      * Executed once the native application has been booted.
      * Use this method to open windows, register global shortcuts, etc.
      */
     public function boot(): void
     {
-        Window::open()->showDevTools(false);
+        $this->settingsWindow->open();
     }
 
     /**
