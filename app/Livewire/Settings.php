@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Config;
+use App\Services\GitLab\GitLabService;
+use App\Services\GitLab\GitlabServiceInterface;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
@@ -11,6 +13,16 @@ class Settings extends Component
     public Config $config;
 
     public array $configData;
+
+    private const PARAM_GITLAB_URL = 'gitlab_url';
+    private const PARAM_GITLAB_API_TOKEN = 'gitlab_api_token';
+
+    private readonly GitLabService $gitlabService;
+
+    public function boot(GitLabService $gitlabService)
+    {
+        $this->gitlabService = $gitlabService;
+    }
 
     protected array $rules = [
         'configData.gitlab_url' => 'required|url:https',
@@ -33,6 +45,14 @@ class Settings extends Component
     public function save(): void
     {
         $this->validate();
+
+        $validConnection = $this->gitlabService->testConnection($this->configData[self::PARAM_GITLAB_URL], $this->configData[self::PARAM_GITLAB_API_TOKEN]);
+
+        if(!$validConnection){
+            session()->flash('message', 'Connection error.');
+            return;
+        }
+
         $this->config->fill($this->configData);
         $this->config->save();
     }

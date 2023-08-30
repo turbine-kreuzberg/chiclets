@@ -1,4 +1,9 @@
 <div class="settings">
+    @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
     <div class="box">
         <h1 class="-mt-0.5em mb-0.5em text-center">Settings</h1>
         <p class="mb-1em">This is your first setup. Please provide your credentials to gitlab.</p>
