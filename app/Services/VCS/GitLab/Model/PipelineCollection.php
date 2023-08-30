@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Services\GitLab\Model;
+namespace App\Services\VCS\GitLab\Model;
 
 use ArrayAccess;
 use Countable;
 use InvalidArgumentException;
 
-class ProjectCollection implements ArrayAccess, Countable
+class PipelineCollection implements ArrayAccess, Countable
 {
     /**
-     * @var Project[]
+     * @var Pipeline[]
      */
     private array $collection;
 
     public function __construct(array $data = [])
     {
-        foreach ($data as $project) {
-            $this->collection[] = new Project($project);
+        $this->collection = [];
+        foreach ($data as $pipeline) {
+            $this->collection[] = new Pipeline($pipeline);
         }
     }
 
@@ -25,7 +26,7 @@ class ProjectCollection implements ArrayAccess, Countable
         return isset($this->collection[$offset]);
     }
 
-    public function offsetGet(mixed $offset): ?Project
+    public function offsetGet(mixed $offset): ?Pipeline
     {
         return $this->collection[$offset] ?? null;
     }
@@ -35,8 +36,8 @@ class ProjectCollection implements ArrayAccess, Countable
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        if (! ($value instanceof Project)) {
-            throw new InvalidArgumentException('Invalid project instance');
+        if (! ($value instanceof Pipeline)) {
+            throw new InvalidArgumentException('Invalid pipeline instance');
         }
 
         $this->collection[$offset] = $value;
@@ -58,8 +59,8 @@ class ProjectCollection implements ArrayAccess, Countable
     public function toArray(): array
     {
         $list = [];
-        foreach ($this->collection as $project) {
-            $list[] = clone $project;
+        foreach ($this->collection as $pipeline) {
+            $list[] = clone $pipeline;
         }
 
         return $list;
@@ -68,13 +69,16 @@ class ProjectCollection implements ArrayAccess, Countable
     public function serialize(): array
     {
         $list = [];
-        foreach ($this->collection as $project) {
+        foreach ($this->collection as $pipeline) {
             $list[] = [
-                'id' => $project->getId(),
-                'name' => $project->getName(),
-                'webUrl' => $project->getWebUrl(),
-                'avatarUrl' => $project->getAvatarUrl(),
-                'defaultBranch' => $project->getDefaultBranch(),
+                'id' => $pipeline->getId(),
+                'projectId' => $pipeline->getProjectId(),
+                'status' => $pipeline->getStatus(),
+                'ref' => $pipeline->getRef(),
+                'name' => $pipeline->getName(),
+                'webUrl' => $pipeline->getWebUrl(),
+                'createdAt' => $pipeline->getCreatedAt(),
+                'updatedAt' => $pipeline->getUpdatedAt(),
             ];
         }
 

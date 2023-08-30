@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services\GitLab\Config;
+namespace App\Services\Config;
 
 use App\Models\Config;
-use App\Services\GitLab\Config\Exceptions\NoConfigException;
+use App\Services\Config\Exceptions\NoConfigException;
 
 class ChicletsConfig implements ConfigInterface
 {
@@ -47,6 +47,11 @@ class ChicletsConfig implements ConfigInterface
     public function getPipelineDisplayNumber(): int
     {
         return $this->getConfig()->pipeline_display_number ?? 5;
+    }
+
+    public function getCacheTTL(): string
+    {
+        return '5 minutes';
     }
 
     /**

@@ -2,11 +2,11 @@
 
 namespace Tests\Unit\App\Services\GitLab\Model;
 
-use App\Services\GitLab\Model\Project;
+use App\Services\VCS\GitLab\Model\Project;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \App\Services\GitLab\Model\Project
+ * @coversDefaultClass \App\Services\VCS\GitLab\Model\Project
  */
 class ProjectTest extends TestCase
 {

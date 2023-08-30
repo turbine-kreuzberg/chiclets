@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\GitLab;
+namespace App\Services\VCS;
 
-use App\Services\GitLab\Model\PipelineCollection;
-use App\Services\GitLab\Model\ProjectCollection;
+use App\Services\VCS\GitLab\Model\PipelineCollection;
+use App\Services\VCS\GitLab\Model\ProjectCollection;
 
-interface GitlabServiceInterface
+interface GitServiceInterface
 {
     public function getPipelines(): PipelineCollection;
 
