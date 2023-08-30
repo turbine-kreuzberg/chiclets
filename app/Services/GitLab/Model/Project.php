@@ -5,10 +5,14 @@ namespace App\Services\GitLab\Model;
 class Project
 {
     private int $id;
-    private string|null $name;
-    private string|null $web_url;
-    private string|null $avatar_url;
-    private string|null $default_branch;
+
+    private ?string $name;
+
+    private ?string $web_url;
+
+    private ?string $avatar_url;
+
+    private ?string $default_branch;
 
     public function __construct(array $data = [])
     {

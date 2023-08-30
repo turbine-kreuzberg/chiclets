@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $deleted_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Config newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Config newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Config query()
@@ -26,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Config whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Config wherePipelineDisplayNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Config whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Config extends Model

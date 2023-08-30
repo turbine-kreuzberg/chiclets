@@ -7,7 +7,6 @@ use Native\Laravel\Contracts\ProvidesPhpIni;
 
 class NativeAppServiceProvider implements ProvidesPhpIni
 {
-
     public function __construct(
         private readonly SettingsWindow $settingsWindow
     ) {

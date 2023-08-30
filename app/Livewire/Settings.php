@@ -4,9 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Config;
 use App\Services\GitLab\GitLabService;
-use App\Services\GitLab\GitlabServiceInterface;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
 use Livewire\Features\SupportRedirects\Redirector;
 
@@ -17,6 +15,7 @@ class Settings extends Component
     public array $configData;
 
     private const PARAM_GITLAB_URL = 'gitlab_url';
+
     private const PARAM_GITLAB_API_TOKEN = 'gitlab_api_token';
 
     private readonly GitLabService $gitlabService;
@@ -50,8 +49,9 @@ class Settings extends Component
 
         $validConnection = $this->gitlabService->testConnection($this->configData[self::PARAM_GITLAB_URL], $this->configData[self::PARAM_GITLAB_API_TOKEN]);
 
-        if(!$validConnection){
+        if (! $validConnection) {
             session()->flash('message', 'Connection error.');
+
             return;
         }
 
@@ -61,4 +61,3 @@ class Settings extends Component
         return redirect()->to('/pipelines');
     }
 }
-

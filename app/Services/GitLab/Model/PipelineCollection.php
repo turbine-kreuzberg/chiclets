@@ -36,8 +36,8 @@ class PipelineCollection implements ArrayAccess, Countable
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        if (!($value instanceof Pipeline)) {
-            throw new InvalidArgumentException("Invalid pipeline instance");
+        if (! ($value instanceof Pipeline)) {
+            throw new InvalidArgumentException('Invalid pipeline instance');
         }
 
         $this->collection[$offset] = $value;
@@ -62,6 +62,7 @@ class PipelineCollection implements ArrayAccess, Countable
         foreach ($this->collection as $pipeline) {
             $list[] = clone $pipeline;
         }
+
         return $list;
     }
 
@@ -80,6 +81,7 @@ class PipelineCollection implements ArrayAccess, Countable
                 'updatedAt' => $pipeline->getUpdatedAt(),
             ];
         }
+
         return $list;
     }
 }

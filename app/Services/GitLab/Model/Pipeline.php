@@ -5,13 +5,20 @@ namespace App\Services\GitLab\Model;
 class Pipeline
 {
     private int $id;
-    private int|null $project_id;
-    private string|null $status;
-    private string|null $ref;
-    private string|null $name;
-    private string|null $web_url;
-    private string|null $created_at;
-    private string|null $updated_at;
+
+    private ?int $project_id;
+
+    private ?string $status;
+
+    private ?string $ref;
+
+    private ?string $name;
+
+    private ?string $web_url;
+
+    private ?string $created_at;
+
+    private ?string $updated_at;
 
     public function __construct(array $data = [])
     {
