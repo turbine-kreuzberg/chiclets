@@ -2,6 +2,7 @@
 
 namespace App\Window;
 
+use App\Models\Config;
 use Native\Laravel\Facades\Window;
 
 class SettingsWindow
@@ -24,5 +25,16 @@ class SettingsWindow
             ->position(self::X, self::Y);
 
         return $this;
+    }
+
+    public function openUnlessConfigured(): self
+    {
+        $config = Config::first();
+
+        if ($config) {
+            return $this;
+        }
+
+        return $this->open();
     }
 }
