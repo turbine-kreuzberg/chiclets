@@ -19,7 +19,7 @@ class NativeAppServiceProvider implements ProvidesPhpIni
      */
     public function boot(): void
     {
-        $this->settingsWindow->open();
+        $this->settingsWindow->openUnlessConfigured();
     }
 
     /**
