@@ -39,4 +39,9 @@ class Config extends Model
         'gitlab_api_token',
         'pipeline_display_number',
     ];
+
+    public function isConfigured(): bool
+    {
+        return $this->gitlab_url && $this->gitlab_api_token;
+    }
 }

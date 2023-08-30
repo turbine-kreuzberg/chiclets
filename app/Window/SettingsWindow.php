@@ -31,7 +31,7 @@ class SettingsWindow
     {
         $config = Config::first();
 
-        if ($config) {
+        if ($config && $config->isConfigured()) {
             return $this;
         }
 
