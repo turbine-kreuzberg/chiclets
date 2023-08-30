@@ -12,13 +12,21 @@ class Settings extends Component
 
     public array $configData;
 
+    protected array $rules = [
+        'configData.gitlab_url' => 'required|url:https',
+        'configData.gitlab_api_token' => 'required',
+        'configData.pipeline_display_number' => 'required|integer|min:1',
+    ];
+
     public function mount(): void
     {
-        $this->config = Config::first() ?: new Config([
-            'gitlab_url' => '',
-            'gitlab_api_token' => '',
-            'pipeline_display_number' => 5
-        ]);
+        $this->config = Config::firstOr(static function (){
+            Config::create([
+                'gitlab_url' => '',
+                'gitlab_api_token' => '',
+                'pipeline_display_number' => 5
+            ]);
+        });
 
         $this->configData = $this->config->toArray();
     }
@@ -30,6 +38,7 @@ class Settings extends Component
 
     public function save(): void
     {
+        $this->validate();
         $this->config->fill($this->configData);
         $this->config->save();
     }
