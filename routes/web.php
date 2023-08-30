@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', static fn() => view('welcome'))->name('welcome');
 Route::get('/settings', static fn() => view('settings'))->name('settings');
+Route::get('/pipelines', static fn() => view('pipelines'))->name('pipelines');

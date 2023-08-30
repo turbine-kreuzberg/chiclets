@@ -11,7 +11,7 @@ use GuzzleHttp\Client;
 
 class GitLabService implements GitlabServiceInterface
 {
-    private const GET_PIPELINES_URL_PATTERN = '/api/v4/projects/%s/pipelines';
+    private const GET_PIPELINES_URL_PATTERN = '/api/v4/projects/%s/pipelines?order_by=updated_at&per_page=%d';
     private const GET_PROJECTS_URL_PATTERN = '/api/v4/projects?membership=true&per_page=500&order_by=updated_at&archived=false&updated_after=%s';
 
     public function __construct(private ConfigInterface $config)
@@ -21,7 +21,12 @@ class GitLabService implements GitlabServiceInterface
 
     public function getPipelines(): PipelineCollection
     {
-        $url = sprintf(self::GET_PIPELINES_URL_PATTERN, $this->config->getCurrentProjectId());
+        $url = sprintf(
+            self::GET_PIPELINES_URL_PATTERN,
+            $this->config->getCurrentProjectId(),
+            $this->config->getPipelineDisplayNumber(),
+        );
+
         $response = json_decode($this->getConnection()->get($url)->getBody(), true, 512, JSON_THROW_ON_ERROR);
 
         return new PipelineCollection($response);

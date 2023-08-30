@@ -4,7 +4,9 @@ namespace App\Livewire;
 
 use App\Models\Config;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class Settings extends Component
 {
@@ -30,11 +32,13 @@ class Settings extends Component
         return view('livewire.settings');
     }
 
-    public function save(): void
+    public function save(): Redirector
     {
         $this->validate();
         $this->config->fill($this->configData);
         $this->config->save();
+
+        return redirect()->to('/pipelines');
     }
 }
 

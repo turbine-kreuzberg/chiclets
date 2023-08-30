@@ -15,6 +15,7 @@ class PipelineCollection implements ArrayAccess, Countable
 
     public function __construct(array $data = [])
     {
+        $this->collection = [];
         foreach ($data as $pipeline) {
             $this->collection[] = new Pipeline($pipeline);
         }
