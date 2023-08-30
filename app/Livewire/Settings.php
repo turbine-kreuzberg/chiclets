@@ -20,13 +20,7 @@ class Settings extends Component
 
     public function mount(): void
     {
-        $this->config = Config::firstOr(static function (){
-            Config::create([
-                'gitlab_url' => '',
-                'gitlab_api_token' => '',
-                'pipeline_display_number' => 5
-            ]);
-        });
+        $this->config = Config::first() ?: Config::create();
 
         $this->configData = $this->config->toArray();
     }

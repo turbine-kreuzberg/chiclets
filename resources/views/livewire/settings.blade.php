@@ -3,7 +3,7 @@
         <h1 class="-mt-0.5em mb-0.5em text-center">Settings</h1>
         <p class="mb-1em">This is your first setup. Please provide your credentials to gitlab.</p>
         <hr />
-        <form wire:submit="save">
+        <form wire:submit.prevent="save">
             <div class="fields mb-2em">
                 <label class="field mb-1em">
                     <span>Gitlab URL</span>
