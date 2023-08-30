@@ -12,7 +12,7 @@ use GuzzleHttp\Client;
 class GitLabService implements GitlabServiceInterface
 {
     private const GET_PIPELINES_URL_PATTERN = '/api/v4/projects/%s/pipelines';
-    private const GET_PROJECTS_URL = '/api/v4/projects';
+    private const GET_PROJECTS_URL_PATTERN = '/api/v4/projects?membership=true&per_page=500&order_by=updated_at&archived=false&updated_after=%s';
 
     public function __construct(private ConfigInterface $config)
     {
@@ -29,7 +29,8 @@ class GitLabService implements GitlabServiceInterface
 
     public function getProjects(): ProjectCollection
     {
-        $response = json_decode($this->getConnection()->get(self::GET_PROJECTS_URL)->getBody(), true, 512, JSON_THROW_ON_ERROR);
+        $url = sprintf(self::GET_PROJECTS_URL_PATTERN, (new \DateTime('-1 month'))->format('c'));
+        $response = json_decode($this->getConnection()->get($url)->getBody(), true, 512, JSON_THROW_ON_ERROR);
 
         return new ProjectCollection($response);
     }
