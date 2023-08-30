@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('configs', function (Blueprint $table) {
             $table->id();
-            $table->string('gitlab_url');
-            $table->string('gitlab_api_token');
-            $table->integer('pipeline_display_number')->default(5);
+            $table->string('gitlab_url')->nullable();
+            $table->string('gitlab_api_token')->nullable();
+            $table->integer('pipeline_display_number')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
