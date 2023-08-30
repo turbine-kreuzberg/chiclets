@@ -38,5 +38,6 @@ class Config extends Model
         'gitlab_url',
         'gitlab_api_token',
         'pipeline_display_number',
+        'current_project_id',
     ];
 }
