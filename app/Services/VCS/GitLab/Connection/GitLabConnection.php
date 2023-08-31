@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class GitLabConnection implements GitConnectionInterface
 {
-    private const GET_PIPELINES_URL_PATTERN = '/api/v4/projects/%s/pipelines';
+    private const GET_PIPELINES_URL_PATTERN = '/api/v4/projects/%s/pipelines?order_by=updated_at&per_page=%d';
 
     private const GET_PROJECTS_URL_PATTERN = '/api/v4/projects?membership=true&per_page=500&order_by=updated_at&archived=false&updated_after=%s';
 
