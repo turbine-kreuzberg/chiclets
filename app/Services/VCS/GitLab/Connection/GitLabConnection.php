@@ -24,7 +24,8 @@ class GitLabConnection implements GitConnectionInterface
     public function getPipelines(): PipelineCollection
     {
         $currentProjectId = $this->config->getCurrentProjectId();
-        if ($currentProjectId === null) {
+
+        if (empty($currentProjectId)) {
             return new PipelineCollection();
         }
 

@@ -5,7 +5,7 @@ namespace App\Services\Config\Exceptions;
 use Exception;
 use Throwable;
 
-class NoConfigException extends Exception
+class NoConfigException extends \RuntimeException
 {
     public function __construct(int $code = 0, Throwable $previous = null)
     {
