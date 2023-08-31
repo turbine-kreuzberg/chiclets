@@ -24,7 +24,7 @@ class ChicletsConfig implements ConfigInterface
      */
     public function getBaseUrl(): string
     {
-        return $this->getConfig()->getGitlabUrl();
+        return $this->getConfig()->gitlab_url;
     }
 
     /**
@@ -32,7 +32,7 @@ class ChicletsConfig implements ConfigInterface
      */
     public function getToken(): string
     {
-        return $this->getConfig()->getGitlabApiToken();
+        return $this->getConfig()->gitlab_api_token;
     }
 
     /**
@@ -40,7 +40,12 @@ class ChicletsConfig implements ConfigInterface
      */
     public function getCurrentProjectId(): string
     {
-        return $this->getConfig()->getProjectId();
+        return $this->getConfig()->current_project_id;
+    }
+
+    public function getPipelineDisplayNumber(): int
+    {
+        return $this->getConfig()->pipeline_display_number ?? 5;
     }
 
     /**

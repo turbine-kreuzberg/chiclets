@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $gitlab_url
  * @property string $gitlab_api_token
  * @property int $pipeline_display_number
+ * @property int $current_project_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $deleted_at
