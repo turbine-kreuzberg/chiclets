@@ -9,4 +9,6 @@ interface GitlabServiceInterface
 {
     public function getPipelines() : PipelineCollection;
     public function getProjects() : ProjectCollection;
+
+    public function testConnection(string $url, string $token): bool;
 }
