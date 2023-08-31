@@ -1,10 +1,8 @@
 <x-page>
-
-    <x-container>
-
-        <div>
+    <div>
+        <div class="menu h-full">
+            <div class="menu-title">Settings</div>
             <livewire:settings />
         </div>
-
-    </x-container>
+    </div>
 </x-page>

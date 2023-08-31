@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
-use App\Window\SettingsWindow;
+use App\Window\DropdownWindow;
 use Native\Laravel\Contracts\ProvidesPhpIni;
 
 class NativeAppServiceProvider implements ProvidesPhpIni
 {
     public function __construct(
-        private readonly SettingsWindow $settingsWindow
+        private readonly DropdownWindow $settingsWindow
     ) {
     }
 
@@ -18,7 +18,7 @@ class NativeAppServiceProvider implements ProvidesPhpIni
      */
     public function boot(): void
     {
-        $this->settingsWindow->openUnlessConfigured();
+        $this->settingsWindow->open();
     }
 
     /**
@@ -26,7 +26,6 @@ class NativeAppServiceProvider implements ProvidesPhpIni
      */
     public function phpIni(): array
     {
-        return [
-        ];
+        return [];
     }
 }
