@@ -9,7 +9,7 @@ use Psr\Cache\CacheItemPoolInterface;
 
 class MemoryCache implements CacheItemPoolInterface
 {
-    /** @var MemoryCacheEntry[] $memory */
+    /** @var MemoryCacheEntry[] */
     private array $memory = [];
 
     /**
@@ -17,9 +17,10 @@ class MemoryCache implements CacheItemPoolInterface
      */
     public function getItem(string $key): CacheItemInterface
     {
-        if (!isset($this->memory[$key]) || !$this->memory[$key]->isAlive()) {
+        if (! isset($this->memory[$key]) || ! $this->memory[$key]->isAlive()) {
             throw new CacheMissException();
         }
+
         return $this->memory[$key];
     }
 
@@ -32,6 +33,7 @@ class MemoryCache implements CacheItemPoolInterface
         foreach ($keys as $key) {
             $list[] = $this->getItem($key);
         }
+
         return $list;
     }
 
@@ -42,21 +44,24 @@ class MemoryCache implements CacheItemPoolInterface
         } catch (CacheMissException) {
             return false;
         }
+
         return true;
     }
 
     public function clear(): bool
     {
         $this->memory = [];
+
         return true;
     }
 
     public function deleteItem(string $key): bool
     {
-        if (!isset($this->memory[$key])) {
+        if (! isset($this->memory[$key])) {
             return false;
         }
         unset($this->memory[$key]);
+
         return true;
     }
 
@@ -66,6 +71,7 @@ class MemoryCache implements CacheItemPoolInterface
         foreach ($keys as $key) {
             $result = $result && $this->deleteItem($key);
         }
+
         return $result;
     }
 
@@ -80,6 +86,7 @@ class MemoryCache implements CacheItemPoolInterface
             throw new CacheCollisionException();
         }
         $this->memory[$key] = $item;
+
         return true;
     }
 

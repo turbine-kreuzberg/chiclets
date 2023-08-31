@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Services\Cache\CacheService;
 use App\Services\Cache\CacheProxyInterface;
+use App\Services\Cache\CacheService;
 use App\Services\Cache\Memory\MemoryCache;
 use App\Services\Config\ChicletsConfig;
 use App\Services\Config\ConfigInterface;
@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             GitServiceInterface::class,
-            function (Application $app) : GitServiceInterface {
+            function (Application $app): GitServiceInterface {
                 return new GitLabService(
                     $app->make(GitConnectionInterface::class),
                     $app->make(CacheProxyInterface::class),
@@ -34,28 +34,28 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(
             GitConnectionInterface::class,
-            function (Application $app) : GitConnectionInterface {
+            function (Application $app): GitConnectionInterface {
                 return new GitLabConnection($app->make(ChicletsConfig::class));
             },
         );
 
         $this->app->singleton(
             ConfigInterface::class,
-            function () : ConfigInterface {
+            function (): ConfigInterface {
                 return new ChicletsConfig();
             },
         );
 
         $this->app->singleton(
             CacheItemPoolInterface::class,
-            function () : CacheItemPoolInterface {
+            function (): CacheItemPoolInterface {
                 return new MemoryCache();
             },
         );
 
         $this->app->singleton(
             CacheProxyInterface::class,
-            function (Application $app) : CacheProxyInterface {
+            function (Application $app): CacheProxyInterface {
                 return new CacheService(
                     $app->make(CacheItemPoolInterface::class),
                     $app->make(ConfigInterface::class),

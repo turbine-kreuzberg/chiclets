@@ -11,13 +11,14 @@ use Symfony\Component\HttpFoundation\Response;
 class GitLabConnection implements GitConnectionInterface
 {
     private const GET_PIPELINES_URL_PATTERN = '/api/v4/projects/%s/pipelines';
+
     private const GET_PROJECTS_URL_PATTERN = '/api/v4/projects?membership=true&per_page=500&order_by=updated_at&archived=false&updated_after=%s';
+
     private const GET_VERSION_URL_PATTERN = '/api/v4/version';
 
     public function __construct(
         readonly private ConfigInterface $config,
-    )
-    {
+    ) {
     }
 
     public function getPipelines(): PipelineCollection
@@ -49,24 +50,25 @@ class GitLabConnection implements GitConnectionInterface
     public function testConnection(
         string $url,
         string $token
-    ): bool
-    {
+    ): bool {
         $client = new Client([
-            'base_uri' => $url . self::GET_VERSION_URL_PATTERN,
+            'base_uri' => $url.self::GET_VERSION_URL_PATTERN,
             'headers' => [
                 'PRIVATE-TOKEN' => $token,
             ],
         ]);
 
-        try{
+        try {
             $statusCode = $client->get(self::GET_VERSION_URL_PATTERN)->getStatusCode();
-        }catch (\Throwable $ex){
+        } catch (\Throwable $ex) {
             return false;
         }
 
         return $statusCode === Response::HTTP_OK;
     }
-    private function getConnection(): Client {
+
+    private function getConnection(): Client
+    {
         static $connection = null;
 
         if ($connection === null) {

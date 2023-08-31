@@ -51,6 +51,7 @@ class Settings extends Component
 
         if (! $validConnection) {
             session()->flash('message', 'Connection error.');
+
             return null;
         }
 

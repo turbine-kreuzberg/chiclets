@@ -44,6 +44,7 @@ class MemoryCacheEntry implements CacheItemInterface
     public function set(mixed $value): static
     {
         $this->data = $value;
+
         return $this;
     }
 
@@ -53,6 +54,7 @@ class MemoryCacheEntry implements CacheItemInterface
             $expiration = new DateTime();
         }
         $this->ttl = $expiration;
+
         return $this;
     }
 
@@ -62,6 +64,7 @@ class MemoryCacheEntry implements CacheItemInterface
             $time = new DateInterval($time ?? 0);
         }
         $this->ttl = (new DateTime())->add($time);
+
         return $this;
     }
 }
