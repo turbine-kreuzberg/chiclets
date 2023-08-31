@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\GitLab\Model;
+namespace App\Services\VCS\GitLab\Model;
 
 class Project
 {

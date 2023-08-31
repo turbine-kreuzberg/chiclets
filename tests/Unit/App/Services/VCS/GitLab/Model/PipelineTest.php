@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Unit\App\Services\GitLab\Model;
+namespace Tests\Unit\App\Services\VCS\GitLab\Model;
 
-use App\Services\GitLab\Model\Pipeline;
+use App\Services\VCS\GitLab\Model\Pipeline;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \App\Services\GitLab\Model\Pipeline
+ * @coversDefaultClass \App\Services\VCS\GitLab\Model\Pipeline
  */
 class PipelineTest extends TestCase
 {

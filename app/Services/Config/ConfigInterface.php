@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\GitLab\Config;
+namespace App\Services\Config;
 
 interface ConfigInterface
 {
@@ -8,7 +8,9 @@ interface ConfigInterface
 
     public function getToken(): string;
 
-    public function getCurrentProjectId(): string;
+    public function getCurrentProjectId(): ?string;
 
     public function getPipelineDisplayNumber(): int;
+
+    public function getCacheTTL(): string;
 }

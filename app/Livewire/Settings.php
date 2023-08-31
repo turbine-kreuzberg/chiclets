@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Config;
-use App\Services\GitLab\GitLabService;
+use App\Services\VCS\GitServiceInterface;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\Features\SupportRedirects\Redirector;
@@ -18,11 +18,11 @@ class Settings extends Component
 
     private const PARAM_GITLAB_API_TOKEN = 'gitlab_api_token';
 
-    private readonly GitLabService $gitlabService;
+    private readonly GitServiceInterface $gitService;
 
-    public function boot(GitLabService $gitlabService)
+    public function boot(GitServiceInterface $gitService)
     {
-        $this->gitlabService = $gitlabService;
+        $this->gitService = $gitService;
     }
 
     protected array $rules = [
@@ -43,16 +43,16 @@ class Settings extends Component
         return view('livewire.settings');
     }
 
-    public function save(): Redirector
+    public function save(): ?Redirector
     {
         $this->validate();
 
-        $validConnection = $this->gitlabService->testConnection($this->configData[self::PARAM_GITLAB_URL], $this->configData[self::PARAM_GITLAB_API_TOKEN]);
+        $validConnection = $this->gitService->testConnection($this->configData[self::PARAM_GITLAB_URL], $this->configData[self::PARAM_GITLAB_API_TOKEN]);
 
         if (! $validConnection) {
             session()->flash('message', 'Connection error.');
 
-            return;
+            return null;
         }
 
         $this->config->fill($this->configData);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\GitLab\Config\Exceptions;
+namespace App\Services\Config\Exceptions;
 
 use Exception;
 use Throwable;

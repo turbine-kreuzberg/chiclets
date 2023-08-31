@@ -3,21 +3,19 @@
 namespace App\Livewire;
 
 use App\Models\Config;
-use App\Services\GitLab\Config\ChicletsConfig;
-use App\Services\GitLab\GitLabService;
+use App\Services\Config\ConfigInterface;
+use App\Services\VCS\GitServiceInterface;
 use Livewire\Component;
 
 class Projects extends Component
 {
-    public $projects;
+    public array $projects;
 
-    public $currentProjectId;
+    public ?string $currentProjectId;
 
-    private GitLabService $gitlabService;
-
-    public function mount(GitLabService $gitLabService, ChicletsConfig $config)
+    public function mount(GitServiceInterface $gitService, ConfigInterface $config)
     {
-        $this->projects = $gitLabService->getProjects()->serialize();
+        $this->projects = $gitService->getProjects()->serialize();
         $this->currentProjectId = $config->getCurrentProjectId();
     }
 
