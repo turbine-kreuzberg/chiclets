@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Services\Config\ChicletsConfig;
 use App\Services\VCS\GitServiceInterface;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -13,22 +14,28 @@ class Pipelines extends Component
 {
     public array $pipelines = [];
 
+    public bool $projectSelected;
+
     private GitServiceInterface $gitService;
 
     private Shell $shell;
 
     private array $pipelinesState = [];
 
+    private ChicletsConfig $config;
+
     public function render()
     {
         return view('livewire.pipelines');
     }
 
-    public function boot(GitServiceInterface $gitService): void
+    public function boot(GitServiceInterface $gitService, ChicletsConfig $config): void
     {
         $this->gitService = $gitService;
+        $this->config = $config;
 
         $this->pipelines = $this->gitService->getPipelines()->serialize() ?? [];
+        $this->projectSelected = $this->config->getCurrentProjectId();
         $this->shell = new Shell(new Client());
 
         $this->checkPipelineUpdates();

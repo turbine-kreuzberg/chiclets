@@ -1,7 +1,16 @@
 <div>
-    <select name="project" id="project" wire:change="setCurrentProject($event.target.value)">
+    <p>Select the project you'd like to observe.</p>
+    <select
+        class="mb-0.5em"
+        wire:change="setCurrentProject($event.target.value)"
+    >
+        <option value="" {{!$currentProjectId ? 'selected':''}}>Please select</option>
         @foreach ($projects as $project)
-            <option wire:key="{{ $project['id'] }}" value="{{ $project['id'] }}"{{ $project['id'] === $currentProjectId ? ' selected' : '' }}>{{ $project['name'] }}</option>
+            <option
+                wire:key="{{ $project['id'] }}"
+                value="{{ $project['id'] }}"
+                {{ (int)$project['id'] === (int)$currentProjectId ? 'selected' : '' }}
+            >{{ $project['name'] }}</option>
         @endforeach
     </select>
 </div>
