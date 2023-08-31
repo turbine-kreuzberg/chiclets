@@ -34,11 +34,13 @@ class SettingsWindow
 
     public function openUnlessConfigured(): self
     {
+        /*
         $config = Config::first();
 
         if ($config && $config->isConfigured()) {
             return $this;
         }
+        */
 
         return $this->open();
     }

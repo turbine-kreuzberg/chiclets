@@ -11,7 +11,7 @@ class Projects extends Component
 {
     public array $projects;
 
-    public string $currentProjectId;
+    public ?string $currentProjectId;
 
     public function mount(GitServiceInterface $gitService, ConfigInterface $config)
     {

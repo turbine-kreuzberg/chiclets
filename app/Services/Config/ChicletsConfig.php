@@ -39,11 +39,14 @@ class ChicletsConfig implements ConfigInterface
     /**
      * @throws NoConfigException if no base config record was found
      */
-    public function getCurrentProjectId(): string
+    public function getCurrentProjectId(): ?string
     {
         return $this->getConfig()->current_project_id;
     }
 
+    /**
+     * @throws NoConfigException if no base config record was found
+     */
     public function getPipelineDisplayNumber(): int
     {
         return $this->getConfig()->pipeline_display_number ?? 5;

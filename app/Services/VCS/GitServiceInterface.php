@@ -9,5 +9,5 @@ interface GitServiceInterface
 {
     public function getProjects() : ProjectCollection;
     public function getPipelines() : PipelineCollection;
-    public function testConnection() : bool;
+    public function testConnection(string $url, string $token): bool;
 }

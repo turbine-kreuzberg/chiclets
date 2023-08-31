@@ -33,13 +33,8 @@ class GitLabService implements GitServiceInterface
         return $this->connection->getPipelines();
     }
 
-    public function testConnection() : bool
+    public function testConnection(string $url, string $token) : bool
     {
-        try {
-            $this->getProjects();
-        } catch (Exception) {
-            return false;
-        }
-        return true;
+        return $this->connection->testConnection($url, $token);
     }
 }
