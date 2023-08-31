@@ -1,5 +1,4 @@
-<div>
+<div class="section pb-0">
     <b>{{ $pipeline['id'] }}</b>
-    <br />
     {{ $pipeline['webUrl'] }}
 </div>

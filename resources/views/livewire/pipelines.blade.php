@@ -1,5 +1,7 @@
 <div>
-    <livewire:projects />
+    <div class="section">
+        <livewire:projects />
+    </div>
 
     <hr />
 

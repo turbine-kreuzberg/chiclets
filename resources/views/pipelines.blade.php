@@ -1,10 +1,6 @@
 <x-page>
-
-    <x-container>
-
-        <div>
-            <livewire:pipelines />
-        </div>
-
-    </x-container>
+    <div class="menu">
+        <div class="menu-title">Pipelines</div>
+        <livewire:pipelines />
+    </div>
 </x-page>
