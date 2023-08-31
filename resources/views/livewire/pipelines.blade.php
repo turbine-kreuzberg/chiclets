@@ -1,4 +1,4 @@
-<div>
+<div wire:poll.15s>
     <div class="section">
         <livewire:projects />
         <a href="/settings" wire:navigate>Change settings</a>
