@@ -33,7 +33,8 @@ class DropdownWindow
                 ->height(self::HEIGHT)
                 ->blendBackgroundBehindWindow()
                 ->transparent()
-                ->alwaysOnTop();
+                ->alwaysOnTop()
+                ->icon(storage_path('app/menuBarIconTemplate.png'));
 
             MenuBar::show();
 
@@ -45,7 +46,8 @@ class DropdownWindow
             ->width(self::WIDTH)
             ->height(self::HEIGHT)
             ->blendBackgroundBehindWindow()
-            ->transparent();
+            ->transparent()
+            ->icon(storage_path('app/menuBarIconTemplate.png'));
 
         return $this;
     }
