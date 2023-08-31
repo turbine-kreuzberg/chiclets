@@ -7,7 +7,7 @@ use App\Services\GitLab\Config\Exceptions\NoConfigException;
 
 class ChicletsConfig implements ConfigInterface
 {
-    private Config|null $config = null;
+    private ?Config $config = null;
 
     public function hasConfig(): bool
     {
@@ -16,6 +16,7 @@ class ChicletsConfig implements ConfigInterface
         } catch (NoConfigException) {
             return false;
         }
+
         return true;
     }
 
@@ -59,6 +60,7 @@ class ChicletsConfig implements ConfigInterface
                 throw new NoConfigException();
             }
         }
+
         return $this->config;
     }
 }

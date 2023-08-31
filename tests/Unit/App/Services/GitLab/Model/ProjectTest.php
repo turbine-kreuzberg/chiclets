@@ -38,6 +38,7 @@ class ProjectTest extends TestCase
      * @covers ::getWebUrl
      * @covers ::getCreatedAt
      * @covers ::getUpdatedAt
+     *
      * @dataProvider provideConstructorTestData
      */
     public function testConstructor(array $data, array $expected): void

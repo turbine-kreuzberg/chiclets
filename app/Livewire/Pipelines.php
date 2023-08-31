@@ -2,12 +2,10 @@
 
 namespace App\Livewire;
 
-use App\Models\Config;
 use App\Services\GitLab\Config\ChicletsConfig;
 use App\Services\GitLab\GitLabService;
 use Livewire\Attributes\On;
 use Livewire\Component;
-use Native\Laravel\Shell;
 
 class Pipelines extends Component
 {

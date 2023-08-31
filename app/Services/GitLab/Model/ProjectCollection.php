@@ -35,8 +35,8 @@ class ProjectCollection implements ArrayAccess, Countable
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        if (!($value instanceof Project)) {
-            throw new InvalidArgumentException("Invalid project instance");
+        if (! ($value instanceof Project)) {
+            throw new InvalidArgumentException('Invalid project instance');
         }
 
         $this->collection[$offset] = $value;
@@ -61,6 +61,7 @@ class ProjectCollection implements ArrayAccess, Countable
         foreach ($this->collection as $project) {
             $list[] = clone $project;
         }
+
         return $list;
     }
 
@@ -76,6 +77,7 @@ class ProjectCollection implements ArrayAccess, Countable
                 'defaultBranch' => $project->getDefaultBranch(),
             ];
         }
+
         return $list;
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Services\GitLab\GitLabService;
-use App\Services\GitLab\Model\ProjectCollection;
 use Livewire\Component;
 
 class ChicletTest extends Component
@@ -21,7 +20,7 @@ class ChicletTest extends Component
     {
         $this->projects = $this->gitlabService->getProjects()->serialize();
 
-//        var_dump($this->projects);
+        //        var_dump($this->projects);
 
         return view('livewire.chiclet-test');
     }
