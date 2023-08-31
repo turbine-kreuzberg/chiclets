@@ -2,16 +2,16 @@
 
 namespace App\Livewire;
 
-use App\Services\GitLab\GitLabService;
+use App\Services\VCS\GitServiceInterface;
 use Livewire\Component;
 
 class ChicletTest extends Component
 {
     public $projects;
 
-    private GitLabService $gitlabService;
+    private GitServiceInterface $gitlabService;
 
-    public function mount(GitLabService $gitLabService)
+    public function mount(GitServiceInterface $gitLabService)
     {
         $this->gitlabService = $gitLabService;
     }

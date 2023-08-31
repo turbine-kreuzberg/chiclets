@@ -10,6 +10,7 @@ use App\Services\Config\ConfigInterface;
 use App\Services\VCS\GitLab\Connection\GitConnectionInterface;
 use App\Services\VCS\GitLab\Connection\GitLabConnection;
 use App\Services\VCS\GitLab\GitLabService;
+use App\Services\VCS\GitServiceInterface;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Psr\Cache\CacheItemPoolInterface;
@@ -22,8 +23,8 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(
-            GitLabService::class,
-            function (Application $app) {
+            GitServiceInterface::class,
+            function (Application $app) : GitServiceInterface {
                 return new GitLabService(
                     $app->make(GitConnectionInterface::class),
                     $app->make(CacheProxyInterface::class),
@@ -33,28 +34,28 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(
             GitConnectionInterface::class,
-            function (Application $app) {
+            function (Application $app) : GitConnectionInterface {
                 return new GitLabConnection($app->make(ChicletsConfig::class));
             },
         );
 
         $this->app->singleton(
-            ChicletsConfig::class,
-            function () {
+            ConfigInterface::class,
+            function () : ConfigInterface {
                 return new ChicletsConfig();
             },
         );
 
         $this->app->singleton(
             CacheItemPoolInterface::class,
-            function () {
+            function () : CacheItemPoolInterface {
                 return new MemoryCache();
             },
         );
 
         $this->app->singleton(
             CacheProxyInterface::class,
-            function (Application $app) {
+            function (Application $app) : CacheProxyInterface {
                 return new CacheService(
                     $app->make(CacheItemPoolInterface::class),
                     $app->make(ConfigInterface::class),

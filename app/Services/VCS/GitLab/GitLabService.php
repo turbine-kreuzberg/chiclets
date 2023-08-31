@@ -7,6 +7,7 @@ use App\Services\VCS\GitLab\Connection\GitConnectionInterface;
 use App\Services\VCS\GitLab\Model\PipelineCollection;
 use App\Services\VCS\GitLab\Model\ProjectCollection;
 use App\Services\VCS\GitServiceInterface;
+use Exception;
 
 class GitLabService implements GitServiceInterface
 {
@@ -30,5 +31,15 @@ class GitLabService implements GitServiceInterface
     public function getPipelines(): PipelineCollection
     {
         return $this->connection->getPipelines();
+    }
+
+    public function testConnection() : bool
+    {
+        try {
+            $this->getProjects();
+        } catch (Exception) {
+            return false;
+        }
+        return true;
     }
 }

@@ -2,34 +2,30 @@
 
 namespace App\Livewire;
 
-use App\Services\GitLab\Config\ChicletsConfig;
-use App\Services\GitLab\GitLabService;
+use App\Services\VCS\GitServiceInterface;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Pipelines extends Component
 {
-    public $pipelines = [];
+    public array $pipelines = [];
 
-    private GitLabService $gitLabService;
-
-    private ChicletsConfig $config;
+    private GitServiceInterface $gitService;
 
     public function render()
     {
         return view('livewire.pipelines');
     }
 
-    public function boot(GitLabService $gitLabService, ChicletsConfig $config): void
+    public function boot(GitServiceInterface $gitService): void
     {
-        $this->gitLabService = $gitLabService;
-        $this->config = $config;
-        $this->pipelines = $this->gitLabService->getPipelines()->serialize() ?? [];
+        $this->gitService = $gitService;
+        $this->pipelines = $this->gitService->getPipelines()->serialize() ?? [];
     }
 
     #[On('projectChanged')]
-    public function updatePipelines($projectId)
+    public function updatePipelines($projectId): void
     {
-        $this->pipelines = $this->gitLabService->getPipelines()->serialize() ?? [];
+        $this->pipelines = $this->gitService->getPipelines()->serialize() ?? [];
     }
 }
