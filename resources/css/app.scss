@@ -2,11 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "menu";
+
 html {
     --primary-color: dodgerblue;
+    --error-color: rgb(225 29 72);
 }
 
 body {
+    font-size: 12px;
+    background: transparent;
 }
 
 .layout {
@@ -25,7 +30,7 @@ h1 {
 }
 
 p {
-    color: #555;
+    margin-bottom: 1em;
 }
 
 hr {
@@ -56,7 +61,6 @@ hr {
 }
 
 .box {
-    background: #fff;
     padding: 2em;
     box-shadow: 1px 1px 50px 1px #00000055;
     border-top: 2px solid dodgerblue;
@@ -81,17 +85,28 @@ hr {
     display: block;
     width: 100%;
     padding: 1em;
-    border-bottom: 2px solid #ccc;
+    border: none;
+    background: #333;
 }
 
 .field input:focus {
     outline: none;
     border-bottom-color: dodgerblue;
-    background: #f0f3ff;
+    background: #222;
 }
 
 .button {
-    padding: 0.5em 2em;
+    padding: 0.8em 2em;
     background: dodgerblue;
     color: #fff;
+}
+
+.message {
+    display: block;
+    padding: 0.5em 1em;
+    background: #555;
+}
+
+.message.error {
+    border-bottom: 3px solid var(--error-color);
 }

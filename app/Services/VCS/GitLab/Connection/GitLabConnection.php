@@ -59,12 +59,21 @@ class GitLabConnection implements GitConnectionInterface
         ]);
 
         try {
-            $statusCode = $client->get(self::GET_VERSION_URL_PATTERN)->getStatusCode();
-        } catch (\Throwable $ex) {
+            $response = $client->get(self::GET_VERSION_URL_PATTERN);
+            $statusCode = $response->getStatusCode();
+        } catch (\Throwable) {
             return false;
         }
 
-        return $statusCode === Response::HTTP_OK;
+        try {
+            $responseData = json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
+        } catch (\Throwable) {
+            return false;
+        }
+
+        return $statusCode === Response::HTTP_OK
+            && ! empty($responseData['version'])
+            && ! empty($responseData['revision']);
     }
 
     private function getConnection(): Client

@@ -12,12 +12,12 @@ class ChicletsConfig implements ConfigInterface
     public function hasConfig(): bool
     {
         try {
-            $this->getConfig();
+            $config = $this->getConfig();
         } catch (NoConfigException) {
             return false;
         }
 
-        return true;
+        return $config->isConfigured();
     }
 
     /**

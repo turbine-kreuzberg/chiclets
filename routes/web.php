@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', static fn () => view('welcome'))->name('welcome');
-Route::get('/settings', static fn () => view('settings'))->name('settings');
-Route::get('/pipelines', static fn () => view('pipelines'))->name('pipelines');
+const ROUTE_NAME_HOME = 'welcome';
+const ROUTE_NAME_SETTINGS = 'settings';
+const ROUTE_NAME_PIPELINES = 'pipelines';
+
+Route::get('/', static fn () => view('welcome'))->name(ROUTE_NAME_HOME);
+Route::get('/settings', static fn () => view('settings'))->name(ROUTE_NAME_SETTINGS);
+Route::get('/pipelines', static fn () => view('pipelines'))->name(ROUTE_NAME_PIPELINES);
