@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\App\Services\GitLab\Model;
+namespace Tests\Unit\App\Services\VCS\GitLab\Model;
 
 use App\Services\VCS\GitLab\Model\Project;
 use PHPUnit\Framework\TestCase;
