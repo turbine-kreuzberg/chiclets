@@ -2,18 +2,15 @@
 
 namespace App\View\Components;
 
+use App\Models\Navigation;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class Page extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    public function __construct(private readonly Navigation $navigation)
     {
-        //
     }
 
     /**
@@ -21,6 +18,8 @@ class Page extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.page');
+        return view('components.page', [
+            'navigation' => $this->navigation,
+        ]);
     }
 }

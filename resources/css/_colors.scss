@@ -1,0 +1,15 @@
+html {
+    --primary-color: #dacb00;
+    --error-color: rgb(225 29 72);
+    --primary-inverse: #000;
+    --input-background: #222;
+    --input-color: #fff;
+}
+
+.c-primary {
+    color: var(--primary-color);
+}
+
+.c-error {
+    color: var(--error-color);
+}

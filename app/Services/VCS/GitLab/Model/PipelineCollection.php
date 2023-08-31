@@ -69,17 +69,9 @@ class PipelineCollection implements ArrayAccess, Countable
     public function serialize(): array
     {
         $list = [];
+        /** @var Pipeline $pipeline */
         foreach ($this->collection as $pipeline) {
-            $list[] = [
-                'id' => $pipeline->getId(),
-                'projectId' => $pipeline->getProjectId(),
-                'status' => $pipeline->getStatus(),
-                'ref' => $pipeline->getRef(),
-                'name' => $pipeline->getName(),
-                'webUrl' => $pipeline->getWebUrl(),
-                'createdAt' => $pipeline->getCreatedAt(),
-                'updatedAt' => $pipeline->getUpdatedAt(),
-            ];
+            $list[] = $pipeline->toArray();
         }
 
         return $list;

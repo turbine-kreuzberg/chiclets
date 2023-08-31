@@ -1,0 +1,15 @@
+.footer {
+    display: flex;
+    background: var(--primary-color);
+    color: var(--primary-inverse);
+
+    a {
+        color: var(--primary-inverse);
+    }
+
+    > * {
+        display: block;
+        padding: 1em;
+        border-right: 1px dotted var(--primary-inverse);;
+    }
+}

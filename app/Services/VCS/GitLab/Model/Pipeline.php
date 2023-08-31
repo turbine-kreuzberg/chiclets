@@ -68,4 +68,32 @@ class Pipeline
     {
         return $this->updated_at ?? null;
     }
+
+    public function getStateIcon(): string
+    {
+        $map = [
+            'failed' => 'fa-solid fa-xmark c-error',
+            'success' => 'fa-solid fa-check c-primary',
+            'pending' => 'fa-solid fa-spinner fa-spin',
+            'canceled' => 'fa-solid fa-ban',
+            'unknown' => 'fa-solid fa-bug',
+        ];
+
+        return $map[$this->getStatus()] ?? $map['unknown'];
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'projectId' => $this->getProjectId(),
+            'status' => $this->getStatus(),
+            'statusIcon' => $this->getStateIcon(),
+            'ref' => $this->getRef(),
+            'name' => $this->getName(),
+            'webUrl' => $this->getWebUrl(),
+            'createdAt' => $this->getCreatedAt(),
+            'updatedAt' => $this->getUpdatedAt(),
+        ];
+    }
 }
