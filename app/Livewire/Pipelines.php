@@ -84,13 +84,13 @@ class Pipelines extends Component
 
             if ($pipeline['status'] !== $currentState[$pipelineId]['status']) {
 
-                if ($pipeline['status'] === 'success') {
-                    $this->fireworkWindow->open();
-                }
-
                 Notification::title('Chiclets')
                     ->message(sprintf('Pipeline %s status was updated to %s', $pipelineId, $pipeline['status']))
                     ->show();
+
+                if ($pipeline['status'] === 'success') {
+                    $this->fireworkWindow->open();
+                }
             }
         }
 
