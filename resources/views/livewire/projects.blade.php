@@ -1,9 +1,6 @@
 <div>
     <p>Select the project you'd like to observe.</p>
-    <select
-        class="mb-0.5em"
-        wire:change="setCurrentProject($event.target.value)"
-    >
+    <select wire:change="setCurrentProject($event.target.value)">
         <option value="" {{!$currentProjectId ? 'selected':''}}>Please select</option>
         @foreach ($projects as $project)
             <option

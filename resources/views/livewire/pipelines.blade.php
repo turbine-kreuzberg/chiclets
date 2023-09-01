@@ -1,20 +1,27 @@
 <div wire:poll.15s>
-    <div class="section">
+    <div class="page-section">
         <livewire:projects/>
-        <a href="/settings" wire:navigate>Change settings</a>
     </div>
 
-    <hr/>
-
-    @if (!$projectSelected)
-        <div class="section">
-            No project selected yet.
+    <div class="page-section">
+        <div class="pipelines">
+            @if (!$projectSelected)
+                <div>
+                    No project selected yet.
+                </div>
+            @else
+                @forelse ($pipelines as $pipeline)
+                    <a href="#"
+                       wire:key="{{ $pipeline['id'] }}"
+                       wire:click.prevent="openPipelineUrl('{{$pipeline['webUrl']}}')"
+                    >
+                        <i class="{{$pipeline['statusIcon']}} mr-0.5em"></i>
+                        {{ $pipeline['id'] }}
+                    </a>
+                @empty
+                    <div>This project has no pipelines.</div>
+                @endforelse
+            @endif
         </div>
-    @else
-        @forelse ($pipelines as $pipeline)
-            @include('includes.pipeline', $pipeline)
-        @empty
-            <div class="section">This project has no pipelines.</div>
-        @endforelse
-    @endif
+    </div>
 </div>

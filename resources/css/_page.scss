@@ -1,0 +1,27 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    background: #000;
+    color: #fff;
+    height: 100%;
+
+    &-content {
+        flex: 1 0;
+    }
+
+    &-title {
+        display: block;
+        padding: 0.9em;
+        background: var(--primary-color);
+        color: var(--primary-inverse);
+        font-size: 1.2em;
+    }
+
+    &-section {
+        padding: 1em;
+    }
+
+    &-footer {
+
+    }
+}

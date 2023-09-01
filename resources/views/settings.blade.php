@@ -1,8 +1,4 @@
-<x-page>
-    <div>
-        <div class="menu h-full">
-            <div class="menu-title">Settings</div>
-            <livewire:settings />
-        </div>
-    </div>
+<x-page :navigation="$navigation">
+    <div class="page-title">Settings</div>
+    <livewire:settings />
 </x-page>

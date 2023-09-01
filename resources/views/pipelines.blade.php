@@ -1,7 +1,4 @@
-<x-page>
-    <div class="menu h-full">
-        <div class="menu-title">Pipelines</div>
-        <hr />
-        <livewire:pipelines />
-    </div>
+<x-page :navigation="$navigation">
+    <div class="page-title">Pipelines</div>
+    <livewire:pipelines />
 </x-page>

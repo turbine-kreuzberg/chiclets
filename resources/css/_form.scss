@@ -2,6 +2,33 @@ select {
     display: block;
     width: 100%;
     padding: 1em;
-    border: 1px solid #fff;
-    background: #555;
+    border: 1px solid #444;
+    background: var(--input-background);
+    color: var(--input-color);
+
+    &:focus {
+        background: #333;
+        outline: none;
+    }
+}
+
+.field span {
+    display: block;
+    margin-bottom: 0.5em;
+    opacity: 0.7;
+}
+
+.field input {
+    display: block;
+    width: 100%;
+    padding: 1em;
+    border: none;
+    color: var(--input-color);
+    background: var(--input-background);
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.field input:focus {
+    outline: none;
+    background: #222;
 }

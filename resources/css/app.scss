@@ -1,13 +1,15 @@
+@import '@fortawesome/fontawesome-free/css/all.min.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import "menu";
+@import "colors";
+@import "page";
 @import "form";
+@import "footer";
+@import "pipelines";
 
 html {
-    --primary-color: dodgerblue;
-    --error-color: rgb(225 29 72);
     height: 100%;
 }
 
@@ -36,9 +38,7 @@ p {
 }
 
 hr {
-    margin-top: 2em;
-    margin-bottom: 2em;
-    border-color: dodgerblue;
+    border-color: var(--primary-color);
 }
 
 .block {
@@ -72,35 +72,10 @@ hr {
     display: block;
 }
 
-.field span {
-    display: block;
-    margin-bottom: 0.5em;
-}
-
-.field span:before {
-    content: '___ ';
-    font-size: 0.7em;
-    color: #999;
-}
-
-.field input {
-    display: block;
-    width: 100%;
-    padding: 1em;
-    border: none;
-    background: #333;
-}
-
-.field input:focus {
-    outline: none;
-    border-bottom-color: dodgerblue;
-    background: #222;
-}
-
 .button {
     padding: 0.8em 2em;
-    background: dodgerblue;
-    color: #fff;
+    background: var(--primary-color);
+    color: var(--primary-inverse);
 }
 
 .message {

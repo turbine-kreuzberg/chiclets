@@ -2,7 +2,6 @@
 
 namespace App\Services\Config\Exceptions;
 
-use Exception;
 use Throwable;
 
 class NoConfigException extends \RuntimeException
