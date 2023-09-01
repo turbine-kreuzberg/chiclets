@@ -7,6 +7,8 @@ use Native\Laravel\Facades\Window;
 
 class FireWorkTrigger extends Component
 {
+    public const WINDOW_NAME = 'fire-work';
+
     public function render()
     {
         return view('livewire.fire-work-trigger');
@@ -14,15 +16,15 @@ class FireWorkTrigger extends Component
 
     public function open(): void
     {
-        Window::open('fire-work')
+        Window::open(self::WINDOW_NAME)
             ->showDevTools(false)
             ->transparent()
             ->fullscreen(true)
-            ->route('settings');
+            ->route(ROUTE_NAME_FIRE_WORK);
     }
 
     public function close(): void
     {
-        Window::close('fire-work');
+        Window::close(self::WINDOW_NAME);
     }
 }

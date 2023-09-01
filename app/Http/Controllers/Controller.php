@@ -31,4 +31,9 @@ class Controller extends BaseController
             ]),
         ]);
     }
+
+    public function fireWorkAction(): View
+    {
+        return \view('fire-work');
+    }
 }
