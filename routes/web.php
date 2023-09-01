@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 const ROUTE_NAME_HOME = 'welcome';
 const ROUTE_NAME_SETTINGS = 'settings';
 const ROUTE_NAME_PIPELINES = 'pipelines';
+const ROUTE_NAME_FIRE_WORK = 'fire-work';
 
 Route::get('/', static fn () => view('welcome'))->name(ROUTE_NAME_HOME);
 Route::get('/settings', [Controller::class, 'settingsAction'])->name(ROUTE_NAME_SETTINGS);
 Route::get('/pipelines', [Controller::class, 'pipelinesAction'])->name(ROUTE_NAME_PIPELINES);
+Route::get('/wirework', [Controller::class, 'fireWorkAction'])->name(ROUTE_NAME_FIRE_WORK);

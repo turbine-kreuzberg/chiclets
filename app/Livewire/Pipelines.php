@@ -22,8 +22,6 @@ class Pipelines extends Component
 
     private array $pipelinesState = [];
 
-    private ChicletsConfig $config;
-
     public function render()
     {
         return view('livewire.pipelines');
@@ -32,10 +30,9 @@ class Pipelines extends Component
     public function boot(GitServiceInterface $gitService, ChicletsConfig $config): void
     {
         $this->gitService = $gitService;
-        $this->config = $config;
 
         $this->pipelines = $this->gitService->getPipelines()->serialize() ?? [];
-        $this->projectSelected = $this->config->getCurrentProjectId();
+        $this->projectSelected = (bool) $config->getCurrentProjectId();
         $this->shell = new Shell(new Client());
 
         $this->checkPipelineUpdates();

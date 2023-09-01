@@ -1,4 +1,4 @@
-<div wire:poll.15s>
+<div wire:poll.5s>
     <div class="page-section">
         <livewire:projects/>
     </div>
@@ -23,5 +23,8 @@
                 @endforelse
             @endif
         </div>
+    </div>
+    <div class="page-section">
+        <livewire:fire-work-trigger />
     </div>
 </div>
