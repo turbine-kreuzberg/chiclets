@@ -24,7 +24,4 @@
             @endif
         </div>
     </div>
-    <div class="page-section">
-        <livewire:fire-work-trigger />
-    </div>
 </div>

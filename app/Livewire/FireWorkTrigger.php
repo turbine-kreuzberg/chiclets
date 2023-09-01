@@ -2,12 +2,19 @@
 
 namespace App\Livewire;
 
+use App\Window\FireworkWindow;
 use Livewire\Component;
-use Native\Laravel\Facades\Window;
 
 class FireWorkTrigger extends Component
 {
     public const WINDOW_NAME = 'fire-work';
+
+    private FireworkWindow $fireworkWindow;
+
+    public function boot(FireworkWindow $fireworkWindow)
+    {
+        $this->fireworkWindow = $fireworkWindow;
+    }
 
     public function render()
     {
@@ -16,15 +23,11 @@ class FireWorkTrigger extends Component
 
     public function open(): void
     {
-        Window::open(self::WINDOW_NAME)
-            ->showDevTools(false)
-            ->transparent()
-            ->fullscreen(true)
-            ->route(ROUTE_NAME_FIRE_WORK);
+        $this->fireworkWindow->open();
     }
 
     public function close(): void
     {
-        Window::close(self::WINDOW_NAME);
+        $this->fireworkWindow->close();
     }
 }
