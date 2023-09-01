@@ -74,7 +74,7 @@ class Pipeline
         $map = [
             'failed' => 'fa-solid fa-xmark c-error',
             'success' => 'fa-solid fa-check c-primary',
-            'pending' => 'fa-solid fa-spinner fa-spin',
+            'running' => 'fa-solid fa-spinner fa-spin',
             'canceled' => 'fa-solid fa-ban',
             'unknown' => 'fa-solid fa-bug',
         ];
