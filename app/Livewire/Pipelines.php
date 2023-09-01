@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\PipelineState;
 use App\Services\Config\ChicletsConfig;
 use App\Services\VCS\GitServiceInterface;
 use Livewire\Attributes\On;
@@ -20,7 +21,7 @@ class Pipelines extends Component
 
     private Shell $shell;
 
-    private array $pipelinesState = [];
+    private ChicletsConfig $config;
 
     public function render()
     {
@@ -30,6 +31,7 @@ class Pipelines extends Component
     public function boot(GitServiceInterface $gitService, ChicletsConfig $config): void
     {
         $this->gitService = $gitService;
+        $this->config = $config;
 
         $this->pipelines = $this->gitService->getPipelines()->serialize() ?? [];
         $this->projectSelected = (bool) $config->getCurrentProjectId();
@@ -41,7 +43,7 @@ class Pipelines extends Component
     #[On('projectChanged')]
     public function updatePipelines($projectId): void
     {
-        $this->pipelinesState = [];
+        $this->resetPipelinesState($projectId ?: null);
         $this->pipelines = $this->gitService->getPipelines()->serialize() ?? [];
     }
 
@@ -55,14 +57,16 @@ class Pipelines extends Component
         if (! $this->pipelines) {
             return;
         }
+        $pipelineState = $this->getPipelineState();
+        $currentState = json_decode($pipelineState->current_state ?? '{}', true, 512, JSON_THROW_ON_ERROR);
 
-        if (! $this->pipelinesState) {
+        if (! $currentState || ($this->config->getCurrentProjectId() !== (string) $pipelineState->project_id)) {
             $this->updatePipelinesStates();
 
             return;
         }
 
-        if (! array_key_exists(reset($this->pipelines)['id'], $this->pipelinesState)) {
+        if (! array_key_exists(reset($this->pipelines)['id'], $currentState)) {
             Notification::title('Chiclets')
                 ->message('New pipelines created.')
                 ->show();
@@ -70,11 +74,11 @@ class Pipelines extends Component
 
         foreach ($this->pipelines as $pipeline) {
             $pipelineId = $pipeline['id'];
-            if (! array_key_exists($pipelineId, $this->pipelinesState)) {
+            if (! array_key_exists($pipelineId, $currentState)) {
                 continue;
             }
 
-            if ($pipeline['status'] !== $this->pipelinesState[$pipelineId]['status']) {
+            if ($pipeline['status'] !== $currentState[$pipelineId]['status']) {
                 Notification::title('Chiclets')
                     ->message(sprintf('Pipeline %s status was updated to %s', $pipelineId, $pipeline['status']))
                     ->show();
@@ -86,8 +90,29 @@ class Pipelines extends Component
 
     private function updatePipelinesStates(): void
     {
+        $currentState = [];
         foreach ($this->pipelines as $pipeline) {
-            $this->pipelinesState[$pipeline['id']] = $pipeline;
+            $currentState[$pipeline['id']] = $pipeline;
         }
+
+        $pipelineStateObj = $this->getPipelineState();
+        $pipelineStateObj->current_state = json_encode($currentState, JSON_THROW_ON_ERROR);
+        $pipelineStateObj->save();
+    }
+
+    private function resetPipelinesState(?int $projectId): void
+    {
+        $state = $this->getPipelineState();
+
+        $state->current_state = json_encode([], JSON_THROW_ON_ERROR);
+        $state->project_id = $projectId;
+        $state->save();
+    }
+
+    private function getPipelineState(): PipelineState
+    {
+        $state = PipelineState::first() ?: PipelineState::create();
+
+        return $state;
     }
 }
