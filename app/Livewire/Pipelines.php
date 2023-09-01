@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\PipelineState;
 use App\Services\Config\ChicletsConfig;
 use App\Services\VCS\GitServiceInterface;
+use App\Window\FireworkWindow;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Native\Laravel\Client\Client;
@@ -23,14 +24,17 @@ class Pipelines extends Component
 
     private ChicletsConfig $config;
 
+    private FireworkWindow $fireworkWindow;
+
     public function render()
     {
         return view('livewire.pipelines');
     }
 
-    public function boot(GitServiceInterface $gitService, ChicletsConfig $config): void
+    public function boot(GitServiceInterface $gitService, ChicletsConfig $config, FireworkWindow $fireworkWindow): void
     {
         $this->gitService = $gitService;
+        $this->fireworkWindow = $fireworkWindow;
         $this->config = $config;
 
         $this->pipelines = $this->gitService->getPipelines()->serialize() ?? [];
@@ -79,6 +83,11 @@ class Pipelines extends Component
             }
 
             if ($pipeline['status'] !== $currentState[$pipelineId]['status']) {
+
+                if ($pipeline['status'] === 'success') {
+                    $this->fireworkWindow->open();
+                }
+
                 Notification::title('Chiclets')
                     ->message(sprintf('Pipeline %s status was updated to %s', $pipelineId, $pipeline['status']))
                     ->show();
