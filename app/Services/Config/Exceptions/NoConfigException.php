@@ -6,7 +6,7 @@ use Throwable;
 
 class NoConfigException extends \RuntimeException
 {
-    public function __construct(int $code = 0, Throwable $previous = null)
+    public function __construct(int $code = 0, ?Throwable $previous = null)
     {
         parent::__construct('config not present', $code, $previous);
     }

@@ -25,7 +25,7 @@ class CacheService implements CacheProxyInterface
         return $this->pool->getItem($id)->get();
     }
 
-    public function store(string $id, mixed $data, DateTime $ttl = null): mixed
+    public function store(string $id, mixed $data, ?DateTime $ttl = null): mixed
     {
         if ($ttl === null) {
             $ttl = new DateTime('+'.$this->config->getCacheTTL());
