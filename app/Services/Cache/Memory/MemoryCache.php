@@ -77,7 +77,7 @@ class MemoryCache implements CacheItemPoolInterface
 
     /**
      * @throws CacheCollisionException
-     *      if an item is already stored with the given collision
+     *                                 if an item is already stored with the given collision
      */
     public function save(CacheItemInterface $item): bool
     {
