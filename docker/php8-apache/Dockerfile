@@ -1,4 +1,4 @@
-FROM php:8.3-apache
+FROM php:8.6-apache
 
 ARG HOST_USER_ID
 
